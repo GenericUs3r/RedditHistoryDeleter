@@ -1,0 +1,7 @@
+{
+    "credentials" : {
+        "username" : "<Username>",
+        "password" : "<Password>"
+    },
+    "driverLocation" : "./geckodriver"
+}
