@@ -8,7 +8,7 @@ It will just perform the delete action on all the posts and/or comments you have
 
 1- Enter the credentials in the config.json file
 
-2- Set the directory of the web driver executable to be used with the script
+2- Set the directory of the web driver executable to be used with the script. You can get the web driver for your browser [here](https://www.selenium.dev/documentation/en/webdriver/driver_requirements/#quick-reference)
 
 3- Modify at lines 100 and 101 what you want to delete, as far as I know, this can not be reversed.
 
