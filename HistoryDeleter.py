@@ -5,17 +5,20 @@ import json
 
 # main automation process at the bottom of the file.
 
+# DOWNLOAD FIREFOX DRIVER AND SPECIFY IT'S LOCATION IN config.json at the 'driverLocation' field. 
+
 # load the credentials and driver location from the config 
 with open("config.json", "r") as f:
     config = json.load(f)
     credentials = config["credentials"]
-    driver_executable = config["driverLocation"] # CHANGE IT IN THE FILE TO THE EXECUTABLE FILE OF THE WEBDRIVER
+    driver_executable = config["driverLocation"]
 
 # for a different browser, you'd have to change the next 3 lines
 profile = webdriver.FirefoxProfile()
 profile.set_preference("dom.webnotifications.enabled", False)   # disable notifications in the browser.
 driver = webdriver.Firefox(firefox_profile=profile,executable_path=driver_executable)    # start driver
 # this 30 seconds wait will occur when the driver can't find any elements of the specified selector(like when deleting is complete)
+driver.maximize_window()    #maximize window
 driver.implicitly_wait(30)  # wait for 30 seconds at most to find an object on the web page(should be adjusted for slower internet connections)
 requests_wait = 5   # 5 seconds wait for requests that take some time(opening login iframe and logging in).
 
