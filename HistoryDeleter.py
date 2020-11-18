@@ -3,11 +3,13 @@ from selenium.webdriver.common.keys import Keys
 import time
 import json
 
+# main automation process at the bottom of the file.
+
 # load the credentials and driver location from the config 
 with open("config.json", "r") as f:
     config = json.load(f)
     credentials = config["credentials"]
-    driver_executable = config["driverLocation"]
+    driver_executable = config["driverLocation"] # CHANGE IT IN THE FILE TO THE EXECUTABLE FILE OF THE WEBDRIVER
 
 # for a different browser, you'd have to change the next 3 lines
 profile = webdriver.FirefoxProfile()
@@ -16,12 +18,14 @@ driver = webdriver.Firefox(firefox_profile=profile,executable_path=driver_execut
 # this 30 seconds wait will occur when the driver can't find any elements of the specified selector(like when deleting is complete)
 driver.implicitly_wait(30)  # wait for 30 seconds at most to find an object on the web page(should be adjusted for slower internet connections)
 requests_wait = 5   # 5 seconds wait for requests that take some time(opening login iframe and logging in).
+
 # navigate to reddit's home page and click login
 def go_to_reddit_login():
     driver.get('https://reddit.com')                              # navigate to reddit's login page
     accept_cookies()
     click_object(driver.find_element_by_css_selector("[href*='https://www.reddit.com/login/']"))
     time.sleep(requests_wait)   # wait 5 seconds for the iframe.
+
 # click accept on the toaster prompting about cookies
 def accept_cookies():
     accept_cookies = driver.find_element_by_css_selector("form div button[type='submit']")
@@ -53,6 +57,7 @@ def login(username, password):
     username_input.send_keys(username)
     password_input.send_keys(password + Keys.ENTER)  # optionally send an Enter key press after the password is entered
     time.sleep(requests_wait)   # couldn't be bothered to make a proper wait for the login request. Just increase this if the browser navigates before the login is complete.
+
 # delete the first post on the profile page.
 def delete_post():
     posts_menu_button = driver.find_element_by_css_selector("button[aria-label='more options']")
@@ -86,6 +91,7 @@ def click_object(web_element):
     except:
         driver.execute_script("arguments[0].click()", web_element)     # click the element forcefully by javascript if normal clicks don't work
 
+# main automation process
 def main():
     go_to_reddit_login()
     switch_to_login_iframe()
