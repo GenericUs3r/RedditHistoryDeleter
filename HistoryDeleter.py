@@ -31,7 +31,7 @@ def go_to_reddit_login():
 
 # click accept on the toaster prompting about cookies
 def accept_cookies():
-    accept_cookies = driver.find_element_by_css_selector("form div button[type='submit']")
+    accept_cookies = driver.find_element_by_css_selector("form button[type='submit']")
     click_object(accept_cookies)
 
 # navigate to the profile after logging in (choose whether )
